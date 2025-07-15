@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brooks Presnell - FileMaker AI Integration Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0e6ed;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(79, 172, 254, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: #a0a6b0;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: #70788a;
+            max-width: 600px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        main {
+            padding: 60px 0;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section h2 {
+            font-size: 2.2rem;
+            color: #4facfe;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(79, 172, 254, 0.1);
+            border-color: rgba(79, 172, 254, 0.3);
+        }
+
+        .card h3 {
+            color: #4facfe;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: #a0a6b0;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+            color: #1a1a2e;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+        }
+
+        .btn.secondary {
+            background: transparent;
+            color: #4facfe;
+            border: 2px solid #4facfe;
+        }
+
+        .btn.secondary:hover {
+            background: #4facfe;
+            color: #1a1a2e;
+        }
+
+        .contact-section {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #a0a6b0;
+        }
+
+        .contact-item svg {
+            width: 20px;
+            height: 20px;
+            fill: #4facfe;
+        }
+
+        .contact-item a {
+            color: #4facfe;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #00f2fe;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #70788a;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4facfe;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .private-access {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            color: #ffc107;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Brooks Presnell</h1>
+            <p class="subtitle">FileMaker AI Integration Lab</p>
+            <p class="tagline">Bridging traditional database systems with modern AI capabilities through innovative FileMaker solutions</p>
+        </header>
+
+        <main>
+            <section class="section">
+                <h2>Network Infrastructure</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3><span class="status-indicator"></span>GEM12 Hub</h3>
+                        <p>Central repository and FileMaker Server hosting. Multi-machine network coordination and sync services.</p>
+                        <a href="https://sync.brookspresnell.com" class="btn">Access Sync Portal</a>
+                        <div class="private-access">🔒 Private Access - Authentication Required</div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><span class="status-indicator"></span>File Services</h3>
+                        <p>Distributed file management and context synchronization across development machines.</p>
+                        <a href="https://files.brookspresnell.com" class="btn">File Manager</a>
+                        <div class="private-access">🔒 Private Access - Authentication Required</div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><span class="status-indicator"></span>Development Portal</h3>
+                        <p>AI-enhanced development environment with cross-machine context awareness and collaboration tools.</p>
+                        <a href="https://dev.brookspresnell.com" class="btn">Development Hub</a>
+                        <div class="private-access">🔒 Private Access - Authentication Required</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Technology Stack</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>FileMaker Pro</h3>
+                        <p>Advanced database development with AI integration capabilities and modern web publishing.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Multi-Machine Network</h3>
+                        <p>Distributed development environment with seamless context synchronization via Tailscale.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>AI Integration</h3>
+                        <p>Claude AI partnership with comprehensive MCP server ecosystem for enhanced development workflows.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section contact-section">
+                <h2>Connect</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
+                        </svg>
+                        <a href="https://github.com/brx017" target="_blank">github.com/brx017</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" />
+                        </svg>
+                        <a href="mailto:brx017+github@gmail.com">brx017+github@gmail.com</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Brooks Presnell - FileMaker AI Integration Lab</p>
+            <p>Powered by GitHub Pages • Secured by Tailscale • Enhanced by Claude AI</p>
+        </footer>
+    </div>
+
+    <script>
+        // Simple status indicator animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const indicators = document.querySelectorAll('.status-indicator');
+            
+            indicators.forEach(indicator => {
+                // Random delay for each indicator
+                setTimeout(() => {
+                    indicator.style.animationDelay = Math.random() * 2 + 's';
+                }, Math.random() * 1000);
+            });
+        });
+
+        // Smooth scrolling for any internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
