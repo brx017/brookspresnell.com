@@ -89,8 +89,8 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
             margin-top: 40px;
         }
 
@@ -98,7 +98,7 @@
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            padding: 30px;
+            padding: 25px;
             text-align: center;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
@@ -113,17 +113,18 @@
         .card h3 {
             color: #4facfe;
             margin-bottom: 15px;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
         .card p {
             color: #a0a6b0;
             margin-bottom: 20px;
+            font-size: 0.95rem;
         }
 
         .btn {
             display: inline-block;
-            padding: 12px 30px;
+            padding: 10px 25px;
             background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
             color: #1a1a2e;
             text-decoration: none;
@@ -134,7 +135,7 @@
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .btn:hover {
@@ -216,10 +217,17 @@
             background: rgba(255, 193, 7, 0.1);
             border: 1px solid rgba(255, 193, 7, 0.3);
             color: #ffc107;
-            padding: 10px 20px;
+            padding: 8px 15px;
             border-radius: 8px;
             margin-top: 15px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 1200px) {
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -233,11 +241,16 @@
             
             .grid {
                 grid-template-columns: 1fr;
+                gap: 25px;
             }
             
             .contact-info {
                 flex-direction: column;
                 gap: 20px;
+            }
+
+            .card {
+                padding: 25px;
             }
         }
     </style>
@@ -269,6 +282,13 @@
                     </div>
                     
                     <div class="card">
+                        <h3><span class="status-indicator"></span>Bible Study Portal</h3>
+                        <p>Advanced Biblical research and study tools with cross-reference systems, commentary integration, and multi-translation analysis.</p>
+                        <a href="https://bible.brookspresnell.com" class="btn">STUDY PORTAL</a>
+                        <div class="private-access">🔒 Private Access - Authentication Required</div>
+                    </div>
+                    
+                    <div class="card">
                         <h3><span class="status-indicator"></span>Development Portal</h3>
                         <p>AI-enhanced development environment with cross-machine context awareness and collaboration tools.</p>
                         <a href="https://dev.brookspresnell.com" class="btn">Development Hub</a>
@@ -293,6 +313,11 @@
                     <div class="card">
                         <h3>AI Integration</h3>
                         <p>Claude AI partnership with comprehensive MCP server ecosystem for enhanced development workflows.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Biblical Research</h3>
+                        <p>Sophisticated scripture analysis tools with cross-reference databases and multi-translation comparative studies.</p>
                     </div>
                 </div>
             </section>
